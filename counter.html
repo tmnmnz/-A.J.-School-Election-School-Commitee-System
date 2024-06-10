@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <title>ระบบนับคะแนนออนไลน์</title>
+    <style>
+        body {
+            font-family: "Prompt", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+            font-size: 18px;
+            text-align: center;
+        }
+        h1 {
+            font-weight: 400;
+            margin: 5px;
+        }
+        h2 {
+            font-weight: 400;
+        }
+        .party {
+            margin: 20px;
+            padding: 30px;
+            border: 2px solid black;
+            background-color: #fff;
+            display: inline-block;
+            border-radius: 20px;
+        }
+        .logo {
+            width: 150px;
+            height: 150px;
+        }
+        .totals {
+            margin-top: 20px;
+            display: block;
+            border: solid 2px black;
+            width: 1400px;
+            max-width: 1400px;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+        .party h2 {
+            margin-top: 30px;
+            font-weight: 400;
+        }
+        .party img {
+            border-radius: 20px;
+            border: 2px solid black;
+        }
+        .graph {
+            width: 100%;
+            margin: 20px auto;
+            text-align: left;
+        }
+        .bar {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .bar div {
+            height: 50px;
+            border-radius: 5px;
+        }
+        .label {
+            margin-left: 10px;
+            font-weight: 400;
+        }
+        .container {
+            background-color: lightgray;
+            border: solid black 2px;
+            border-radius: 15px;
+            display: flex;
+            width: 1400px;
+            margin-bottom: 10px;
+            max-width: 1920px;
+            margin: auto;
+            margin-bottom: 10px;
+        }
+        .container .sub-container .topic {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding: 10px;
+        }
+        .container .sub-container .topic img {
+            display: inline;
+            width: 60px;
+            margin-left: 10px;
+            margin-top: 0px;
+        }
+        .container .sub-container .topic p {
+            display: inline;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+        .container .sub-container .topic .head {
+            font-size: 22px;
+        }
+        .container .article {
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 20px;
+            display: block;
+            width: 1350px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            background-color: white;
+        }
+        .party span{
+            font-weight: 400;
+            font-size: 24px;
+        }
+        .party p{
+            font-weight: 400;
+            font-size: 24px;
+        }
+        .head {
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head">
+        <h1>โรงเรียน เอ.เจ.เนินมะปราง</h1>
+        <h1>ผลการนับคะแนนการเลือกตั้งประธานนักเรียน ปีการศึกษา 2567</h1>
+    </div>
+    <div id="parties">
+        <div class="party" id="party1">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMoIlz3dMNW8kqBlDCc9Fw88DCG8ISljRyGm64l0FHeoGic2EqQjfNPbm-0TEZdypCRhCjcqoKiFHTzaJJ8Q_s7MO-JEH-oPNedH9ScA38uCwW7TRXeO9m75eTqkOY7cLOSY_X0OkOYYM8GudRezSgf=w500-h500-s-no-gm?authuser=0" 
+            alt="โลโก้พรรค 1" class="logo">
+            <h2>พรรคอะไรก็ได้</h2>
+            <p>คะแนน: <span id="score1">0</span></p>
+        </div>
+        <div class="party" id="party2">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczNhRd5nG19hA1MZ06sT_vCC4XStjU_EzyZa2W2-u5arMgblIEAngla7y9n1MSpScSitJjgB1pGbIZo0_WTIDQDZyk4nK-UjwBaCPyfStJo_74SgqiL5H3FFHyXPa61FjIABmClPH5nTrkfYSAye_K1B=w945-h945-s-no-gm?authuser=0" 
+            alt="โลโก้พรรค 2" class="logo">
+            <h2>พรรคบุ้งไฟแรง</h2>
+            <p>คะแนน: <span id="score2">0</span></p>
+        </div>
+        <div class="party" id="party3">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMB0O33ySaCxHqNBgNxhACOn2grGmb8ysm4Jau5eEwdKK3nnUjxY1LJpuBxAgHieC_SzWL8viK6xvc7qNM_CYDv5wcvnOecEpCkGmtgJfVLUgonwmGHv-HPzElG3nFnd2nhPm01edSDRuQH-3xKn6NE=w500-h500-s-no-gm?authuser=0" 
+            alt="โลโก้พรรค 3" class="logo">
+            <h2>พรรคกำลังก้าว</h2>
+            <p>คะแนน: <span id="score3">0</span></p>
+        </div>
+        <div class="party" id="invalid">
+            <img src="https://media.discordapp.net/attachments/1246905081396334693/1249550502723846196/2.png?ex=6667b617&is=66666497&hm=0bce1d4d9f584692b778f727c88d758edd2d8db13ff7780a862ea999cd2fa014&=&format=webp&quality=lossless" alt="บัตรเสีย" class="logo">
+            <h2>บัตรเสีย</h2>
+            <p>คะแนน: <span id="invalidScore">0</span></p>
+        </div>
+        <div class="party" id="none">
+            <img src="https://media.discordapp.net/attachments/1246905081396334693/1249549679423787108/2ccd312287332082.png?ex=6667b553&is=666663d3&hm=a7f626b4af9dac107d197c8037d6c2c9cfd24b9bc74fec3477fffd6185a6ce74&=&format=webp&quality=lossless" alt="ไม่ประสงค์ลงคะแนน" class="logo">
+            <h2>ไม่ประสงค์ลงคะแนน</h2>
+            <p>คะแนน: <span id="noneScore">0</span></p>
+        </div>
+    </div>
+    <div class="totals">
+        <h2>คะแนนรวมทั้งหมด: <span id="totalScore">0</span></h2>
+    </div>
+
+    <div class="container">
+        <div class="sub-container">
+            <div class="topic">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczN9w5bKC0_S7sB6SuwzV6IwnJ-iqCYEY9HI7AGDLZmDJubKKOnqykQ9-QPnT327HJd4J3Yv7RJi4a5RsuBWSfBLQXTECEJN7YW5GbdBSAEFqTjEW5wPdKqms0BWDdJBjFgOxuavRSq2OnK9GP7poKGk=w500-h500-s-no-gm?authuser=0">
+                <p class="head">สถิติทั้งหมด</p>
+            </div>
+            <div class="article">
+                <div class="graph">
+                    <div class="bar" id="bar1"><div class="bar1" style="background-color: #4caf50;"></div><span class="label" id="label1">พรรคอะไรก็ได้: 0%</span></div>
+                    <div class="bar" id="bar2"><div class="bar2" style="background-color: #2196f3;"></div><span class="label" id="label2">พรรคบุ้งไฟแรง: 0%</span></div>
+                    <div class="bar" id="bar3"><div class="bar3" style="background-color: #ff5722;"></div><span class="label" id="label3">พรรคกำลังก้าว: 0%</span></div>
+                    <div class="bar" id="barInvalid"><div class="barInvalid" style="background-color: #9e9e9e;"></div><span class="label" id="labelInvalid">บัตรเสีย: 0%</span></div>
+                    <div class="bar" id="barNone"><div class="barNone" style="background-color: #9e9e9e;"></div><span class="label" id="labelNone">ไม่ประสงค์ลงคะแนน: 0%</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let score1 = 0;
+        let score2 = 0;
+        let score3 = 0;
+        let invalidScore = 0;
+        let noneScore = 0;
+        let totalScore = 0;
+
+        document.addEventListener('keydown', function(event) {
+            if(event.key === '1') {
+                score1++;
+                totalScore++;
+                console.log('[ + ] คะแนนเบอร์ 1 >'+score1)
+            } else if(event.key === '2') {
+                score2++;
+                totalScore++;
+                console.log('[ + ] คะแนนเบอร์ 2 >'+score2)
+            } else if(event.key === '3') {
+                score3++;
+                totalScore++;
+                console.log('[ + ] คะแนนเบอร์ 3 >'+score3)
+            } else if(event.key === '4') {
+                invalidScore++;
+                totalScore++;
+                console.log('[ + ] คะแนนบัตรเสีย >'+invalidScore)
+            } else if(event.key === '5') {
+                noneScore++;
+                totalScore++;
+                console.log('[ + ] คะแนนไม่ประสงค์ลงคะแนน >'+noneScore)
+            } else if(event.key === 'Z') {
+                score1--;
+                totalScore--;
+                console.log('[ - ] ลบคะแนนเบอร์ 1 >'+score1)
+            } else if(event.key === 'X') {
+                score2--;
+                totalScore--;
+                console.log('[ - ] ลบคะแนนเบอร์ 2 >'+score2)
+            } else if(event.key === 'C') {
+                score3--;
+                totalScore--;
+                console.log('[ - ] ลบคะแนนเบอร์ 3 >'+score3)
+            }else if(event.key === 'V') {
+                invalidScore--;
+                totalScore = totalScore - 1;
+                console.log('[ - ] ลบคะแนนบัตรเสีย >'+invalidScore)
+            }else if(event.key === 'B') {
+                noneScore --;
+                totalScore--;
+                console.log('[ - ] ลบคะแนนผู้ไม่ประสงค์ลงคะแนน >'+noneScore)
+            }
+            updateScores();
+        });
+
+        function updateScores() {
+            document.getElementById('score1').innerText = score1;
+            document.getElementById('score2').innerText = score2;
+            document.getElementById('score3').innerText = score3;
+            document.getElementById('invalidScore').innerText = invalidScore;
+            document.getElementById('noneScore').innerText = noneScore;
+            document.getElementById('totalScore').innerText = totalScore;
+
+            let percent1 = (score1 / totalScore * 100).toFixed(2) || 0;
+            let percent2 = (score2 / totalScore * 100).toFixed(2) || 0;
+            let percent3 = (score3 / totalScore * 100).toFixed(2) || 0;
+            let percentInvalid = (invalidScore / totalScore * 100).toFixed(2) || 0;
+            let percentNone = (noneScore / totalScore * 100).toFixed(2) || 0;
+
+            document.querySelector('.bar1').style.width = percent1 + '%';
+            document.querySelector('.bar2').style.width = percent2 + '%';
+            document.querySelector('.bar3').style.width = percent3 + '%';
+            document.querySelector('.barInvalid').style.width = percentInvalid + '%';
+            document.querySelector('.barNone').style.width = percentNone + '%';
+
+            document.getElementById('label1').innerText = `พรรคอะไรก็ได้: ${percent1}%`;
+            document.getElementById('label2').innerText = `พรรคบุ้งไฟแรง: ${percent2}%`;
+            document.getElementById('label3').innerText = `พรรคกำลังก้าว: ${percent3}%`;
+            document.getElementById('labelInvalid').innerText = `บัตรเสีย: ${percentInvalid}%`;
+            document.getElementById('labelNone').innerText = `ไม่ประสงค์ลงคะแนน: ${percentNone}%`;
+        }
+    </script>
+</body>
+</html>
